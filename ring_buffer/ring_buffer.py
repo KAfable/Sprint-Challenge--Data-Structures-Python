@@ -25,9 +25,6 @@ class RingBuffer:
             self.current.value = item
             self.current = self.current.next
 
-            # if at capacity, remove the oldest (head), add to tail
-            # you don't replace new nodes, you change the value
-
     def get(self):
         # Note:  This is the only [] allowed
         list_buffer_contents = []
@@ -46,10 +43,26 @@ class RingBuffer:
 
 class ArrayRingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.storage = [None] * capacity
+        self.oldest = 0
+        self.current = 0
 
     def append(self, item):
-        pass
+        if self.current < self.capacity:
+            self.storage[self.current] = item
+            self.current += 1
+        else:
+            if self.oldest < self.capacity:
+                self.storage[self.oldest] = item
+            else:
+                self.oldest = 0
+                self.storage[self.oldest] = item
+            self.oldest += 1
 
     def get(self):
-        pass
+        list_buffer = []
+        for item in self.storage:
+            if item is not None:
+                list_buffer.append(item)
+        return list_buffer
