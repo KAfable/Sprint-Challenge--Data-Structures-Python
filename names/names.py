@@ -1,6 +1,6 @@
 import time
+from binary_search_tree import BinarySearchTree
 
-start_time = time.time()
 
 f = open('names_1.txt', 'r')
 names_1 = f.read().split("\n")  # List containing 10000 names
@@ -10,19 +10,60 @@ f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-duplicates = []  # Return the list of duplicates in this data structure
+# Loop Original
 
-# Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+loop_duplicates = []
+loop_start_time = time.time()
 
-end_time = time.time()
-print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print (f"runtime: {end_time - start_time} seconds")
+name_tree = BinarySearchTree('fake name')
+for name in names_1:
+    for name2 in names_2:
+        if name == name2:
+            loop_duplicates.append(name)
+
+loop_end_time = time.time()
+print(f"{len(loop_duplicates)} duplicates:\n\n{', '.join(loop_duplicates)}\n\n")
+print(f"loop runtime: {loop_end_time - loop_start_time} seconds")
+
+
+# BST Solution
+bst_duplicates = []
+bst_start_time = time.time()
+
+name_tree = BinarySearchTree('fake name')
+for name in names_1:
+    name_tree.insert(name)
+
+for name in names_2:
+    if name_tree.contains_iteratively(name):
+        bst_duplicates.append(name)
+
+bst_end_time = time.time()
+# print(f"{len(bst_duplicates)} duplicates:\n\n{', '.join(bst_duplicates)}\n\n")
+print(
+    f"BST runtime: {bst_end_time - bst_start_time} seconds, {len(bst_duplicates)} found")
 
 # ---------- Stretch Goal -----------
-# Python has built-in tools that allow for a very efficient approach to this problem
-# What's the best time you can accomplish?  Thare are no restrictions on techniques or data
-# structures, but you may not import any additional libraries that you did not write yourself.
+# Dictionary Solution
+dict_duplicates = []
+dict_start_time = time.time()
+
+dict1 = {name: 1 for name in names_1}
+for name in names_2:
+    if name in dict1:
+        dict_duplicates.append(name)
+
+dict_end_time = time.time()
+# print(f"{len(dict_duplicates)} duplicates:\n\n{', '.join(dict_duplicates)}\n\n")
+print(
+    f"Dict runtime: {dict_end_time - dict_start_time} seconds, {len(dict_duplicates)} found")
+
+# Set Solution
+set_start_time = time.time()
+names_1_set = set(names_1)
+names_2_set = set(names_2)
+set_duplicates = names_1_set.intersection(names_2_set)
+set_end_time = time.time()
+# print(f"{len(set_duplicates)} duplicates:\n\n{', '.join(set_duplicates)}\n\n")
+print(
+    f"Set runtime: {set_end_time - set_start_time} seconds {len(set_duplicates)} found")
