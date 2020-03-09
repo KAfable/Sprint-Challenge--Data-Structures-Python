@@ -58,6 +58,10 @@ dict_end_time = time.time()
 print(
     f"Dict runtime: {dict_end_time - dict_start_time} seconds, {len(dict_duplicates)} found")
 
+
+# fast_duplicates = set(names_1+names_2)
+
+
 # Set Solution
 set_start_time = time.time()
 names_1_set = set(names_1)

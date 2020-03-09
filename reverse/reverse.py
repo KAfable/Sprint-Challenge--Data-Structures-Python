@@ -62,11 +62,8 @@ class LinkedList:
         self.head.next_node = None
         while new is not None:
             prev = current
-            print(f'prev: {prev}')
             current = new
-            print(f'current: {current}')
             new = current.next_node
-            print(f'new: {new}')
             current.next_node = prev
         self.head = current
         return self.head
