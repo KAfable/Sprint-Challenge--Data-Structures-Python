@@ -67,3 +67,16 @@ class LinkedList:
             current.next_node = prev
         self.head = current
         return self.head
+
+    def reverse_list_recursively(self, node, prev=None):
+        # base case
+        if node is None:
+            self.head = prev
+            return prev
+
+        # actually need to traverse
+        reverse = self.reverse_list_recursively(node.next, node)
+        node.next = prev
+
+        # return tail (which is new head)
+        return reverse

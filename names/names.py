@@ -12,18 +12,18 @@ f.close()
 
 # Loop Original
 
-loop_duplicates = []
-loop_start_time = time.time()
+# loop_duplicates = []
+# loop_start_time = time.time()
 
-name_tree = BinarySearchTree('fake name')
-for name in names_1:
-    for name2 in names_2:
-        if name == name2:
-            loop_duplicates.append(name)
+# name_tree = BinarySearchTree('fake name')
+# for name in names_1:
+#     for name2 in names_2:
+#         if name == name2:
+#             loop_duplicates.append(name)
 
-loop_end_time = time.time()
-print(f"{len(loop_duplicates)} duplicates:\n\n{', '.join(loop_duplicates)}\n\n")
-print(f"loop runtime: {loop_end_time - loop_start_time} seconds")
+# loop_end_time = time.time()
+# print(f"{len(loop_duplicates)} duplicates:\n\n{', '.join(loop_duplicates)}\n\n")
+# print(f"loop runtime: {loop_end_time - loop_start_time} seconds")
 
 
 # BST Solution
